@@ -1,0 +1,7 @@
+SELECT 
+    year, 
+    CONCAT(year, '-01-01') AS full_date, 
+    CURRENT_DATE() AS now_date, 
+    TIMESTAMPDIFF(YEAR, CONCAT(year, '-01-01'), CURRENT_DATE()) AS sub 
+FROM 
+    infectious_cases;

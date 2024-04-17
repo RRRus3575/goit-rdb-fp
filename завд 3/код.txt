@@ -1,0 +1,16 @@
+- select Code_id, AVG(Number_rabies), MIN(Number_rabies), MAX(Number_rabies),   SUM(Number_rabies) from infectious_cases
+  where Number_rabies != ''
+  group by Code_id;
+
+
+- select Code_id, AVG(Number_rabies) avg, MIN(Number_rabies) min, MAX  (Number_rabies) max, SUM(Number_rabies) sum from infectious_cases
+   where Number_rabies != ''
+   group by Code_id
+   order by avg DESC;
+
+
+- select Code_id, AVG(Number_rabies) avg, MIN(Number_rabies) min, MAX    (Number_rabies) max, SUM(Number_rabies) sum from infectious_cases
+  where Number_rabies != ''
+  group by Code_id
+  order by avg DESC
+  limit 10;

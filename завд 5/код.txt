@@ -1,0 +1,19 @@
+DROP FUNCTION IF EXISTS year_difference;
+
+DELIMITER //
+
+CREATE FUNCTION year_difference(year_value INT) 
+RETURNS INT
+BEGIN
+    DECLARE cur_date DATE;
+    DECLARE year_value DATE;
+    DECLARE year_dif INT;
+
+    SET cur_date = CURRENT_DATE();
+    SET year_value = STR_TO_DATE(CONCAT(year_value, '-01-01'), '%Y-%m-%d');
+    SET year_dif = TIMESTAMPDIFF(YEAR, year_date_value, current_date_value);
+    
+    RETURN year_dif;
+END;
+
+DELIMITER ;
