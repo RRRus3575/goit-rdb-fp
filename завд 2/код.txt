@@ -1,0 +1,36 @@
+CREATE TABLE entity(
+id INT PRIMARY KEY AUTO_INCREMENT,
+code VARCHAR(8),
+country VARCHAR(64) NOT NULL UNIQUE
+);
+
+
+
+INSERT INTO entity (code, country)
+SELECT DISTINCT code, entity FROM infectious_cases;
+
+
+
+CREATE TABLE infectious_cases_normal
+AS SELECT * FROM infectious_cases;
+
+
+
+ALTER TABLE infectious_cases_normal
+ADD id INT PRIMARY KEY AUTO_INCREMENT FIRST,
+ADD entity_id INT AFTER id,
+ADD CONSTRAINT fk_entity_id FOREIGN KEY (entity_id) REFERENCES entity(id);
+
+
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE infectious_cases_normal, entity
+SET infectious_cases_normal.entity_id = entity.id WHERE entity.code = infectious_cases_normal.code AND infectious_cases_normal.entity=entity.country ;
+
+
+
+
+SET SQL_SAFE_UPDATES = 1;
+ALTER TABLE infectious_cases_normal
+DROP COLUMN entity,
+DROP COLUMN code;
